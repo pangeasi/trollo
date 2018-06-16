@@ -5,7 +5,7 @@
             <label for="user">Contraseña: </label><input type="password" name="pass">
             <label for="user">Repite Contraseña: </label><input type="password" name="repass">
         </div>
-        <div class="g-recaptcha" data-sitekey="tu-key"></div>
+        <div class="g-recaptcha" data-sitekey="<?php echo API_RECAPTCHA_PUB?>"></div>
         <br>
         <input type="submit" value="Registrame!">
         <?php if($err == 100){echo "<p class='error content'>No se pudo registrar</p>"; }?>
@@ -13,7 +13,7 @@
     </form>
     <?php
      require_once "includes/recaptchalib.php";
-     $secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+     $secret = API_RECAPTCHA_PRIV;
      $response = null;
      $usuario=$_POST['user'];
      $pass=md5($_POST['pass']);
