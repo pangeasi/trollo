@@ -1,0 +1,3 @@
+# Trollo (clon de trello)
+
+Trollo intenta ser un clon de Trello, creado para aprender php, conexión a la base de datos, javascript...
