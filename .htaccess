@@ -1,0 +1,6 @@
+
+RewriteEngine On
+
+RewriteCond %{REQUESTFILENAME} !-d
+RewriteCond %{REQUESTFILENAME} !-f
+RewriteRule ^([^.]+)$ /index.php?url=$1 [NC,L]
