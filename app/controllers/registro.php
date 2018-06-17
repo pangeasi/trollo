@@ -18,6 +18,12 @@ class Registro extends Controller {
          
         if ($response != null && $response->success && $pass == $repass) {
            // Válido
+            $chekUser = $this->model->query("SELECT * FROM user WHERE nombre = :name",array("name"=>$usuario));
+            
+            if(count($chekUser)==1){
+               
+                exit( header("Location:/registro/error/300"));
+            }
            try{
             $result = $this->model->query("INSERT INTO user (nombre, password, rol) VALUES (:name, :pass, :user)", array(
                 "name" => $usuario,
@@ -34,7 +40,7 @@ class Registro extends Controller {
                 session_start();
                 if(!isset($_SESSION['user_id'])){
                     $_SESSION['user_id'] = array($this->model->lastInsertId(),$usuario);
-                    header("Location:/privates/name/$usuario/".$_SESSION['user_id']);
+                    header("Location:/privates/name/$usuario/".$_SESSION['user_id'][0]);
                 }
             }else{
                 header("Location:/registro/error/100");
@@ -42,7 +48,7 @@ class Registro extends Controller {
    
          } else {
            // Si el código no es válido
-           //header("Location:/registro/error/200");
+           if(isset($_POST['user']))header("Location:/registro/error/200");
          }
 
     }

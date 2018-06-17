@@ -9,7 +9,8 @@
         <br>
         <input type="submit" value="Registrame!">
         <?php if($err == 100){echo "<p class='error content'>No se pudo registrar</p>"; }?>
-        <?php if($err == 200){echo "<p class='error content'>El captcha no funciona</p>"; }?>
+        <?php if($err == 200){echo "<p class='error content'>¿Eres un robot?</p>"; }?>
+        <?php if($err == 300){echo "<p class='error content'>El usuario ya existe</p>";}?>
     </form>
     <?php
      require_once "includes/recaptchalib.php";
