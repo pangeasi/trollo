@@ -45,7 +45,7 @@ class Registro extends Controller {
                 session_start();
                 if(!isset($_SESSION['user_id'])){
                     $_SESSION['user_id'] = array($this->model->lastInsertId(),$usuario);
-                    header("Location:/privates/name/$usuario/".$_SESSION['user_id'][0]);
+                    header("Location:/muro");
                 }
             }else{
                 header("Location:/registro/error/100");

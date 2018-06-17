@@ -38,10 +38,19 @@ class Application {
                 }
             }
         } else {
+            array_unshift($this->url_params,$this->url_action);
+            $this->url_action = $this->url_controller;;
+
             require APP . 'controllers/home.php';
             $page = new Home();
-            if (method_exists($page, $this->url_controller)) {
-                exit($page->{$this->url_controller}());
+            if (method_exists($page, $this->url_action)) {
+                if (!empty($this->url_params)) {
+                    // llama al metodo y le pasa los parametros
+                    call_user_func_array(array($page, $this->url_action), $this->url_params);
+                }else{
+                    exit($page->{$this->url_action}());
+                }
+                
             }else{
                 header('location: ' . URL . 'problem');
             }
@@ -54,7 +63,8 @@ class Application {
         if (isset($_GET['url'])) {
 
             $url = trim($_GET['url'], '/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
+            //urlencode($url);
+            //$url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode('/', $url);
 
             $this->url_controller = isset($url[0]) ? $url[0] : null;

@@ -52,3 +52,16 @@ input[type="submit"] {
 .error{
     color: red;
 }
+.muro{
+    width: max-content;
+    cursor: pointer;
+    color: black;
+    padding: 3px;
+}
+.muro:hover{
+    background-color: aqua;
+    padding: 3px;
+}
+.tarjetas{
+    cursor: pointer;
+}

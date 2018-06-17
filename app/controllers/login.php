@@ -26,7 +26,7 @@ class Login extends Controller {
                 session_start();
                 if(!isset($_SESSION['user_id'])){
                     $_SESSION['user_id'] = array($result[0]['id'],$user);
-                    header("Location:/privates/name/$user/".$result[0]['id']);
+                    header("Location:/muro");
                 }
             }else{
                 header('location:/login/badLogin');
