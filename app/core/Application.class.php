@@ -38,7 +38,15 @@ class Application {
                 }
             }
         } else {
-            header('location: ' . URL . 'problem');
+            require APP . 'controllers/home.php';
+            $page = new Home();
+            if (method_exists($page, $this->url_controller)) {
+                exit($page->{$this->url_controller}());
+            }else{
+                header('location: ' . URL . 'problem');
+            }
+            
+            
         }
     }
 

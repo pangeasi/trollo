@@ -16,7 +16,7 @@ class Login extends Controller {
             
             // $result = $this->model->login($pass,$user);
             try{
-                $result = $this->model->query("SELECT * FROM user WHERE password = :pass AND nombre = :user",array("pass" => $pass,"user" => $user));
+                $result = $this->model->query("SELECT * FROM usuarios WHERE password = :pass AND nombre = :user",array("pass" => $pass,"user" => $user));
             }catch(PDOException $e){
                 echo $e;
             }

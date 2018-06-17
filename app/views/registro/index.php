@@ -2,6 +2,7 @@
     <form action="/registro" method="post">
         <div class="content">
             <label for="user">Usuario: </label><input type="text" name="user">
+            <label for="user">Correo: </label><input type="email" name="email">
             <label for="user">Contraseña: </label><input type="password" name="pass">
             <label for="user">Repite Contraseña: </label><input type="password" name="repass">
         </div>
@@ -17,6 +18,7 @@
      $secret = API_RECAPTCHA_PRIV;
      $response = null;
      $usuario=$_POST['user'];
+     $email=$_POST['email'];
      $pass=md5($_POST['pass']);
      $repass=md5($_POST['repass']);
      // comprueba la clave secreta

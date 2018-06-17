@@ -18,17 +18,22 @@ class Registro extends Controller {
          
         if ($response != null && $response->success && $pass == $repass) {
            // Válido
-            $chekUser = $this->model->query("SELECT * FROM user WHERE nombre = :name",array("name"=>$usuario));
+            $chekUser = $this->model->query("SELECT * FROM usuarios WHERE nombre = :name OR correo = :correo",array(
+                "name"=>$usuario,
+                "correo"=>$email
+        ));
             
             if(count($chekUser)==1){
                
                 exit( header("Location:/registro/error/300"));
             }
            try{
-            $result = $this->model->query("INSERT INTO user (nombre, password, rol) VALUES (:name, :pass, :user)", array(
+            $result = $this->model->query("INSERT INTO usuarios (nombre, password, correo, rol) VALUES (:name, :pass, :correo, :user)", array(
                 "name" => $usuario,
                 "pass" => $pass,
+                "correo" => $email,
                 "user" => "user"
+
             ));
            }catch(PDOException $e){
                echo $e;
