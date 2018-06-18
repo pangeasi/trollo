@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Testing MVC</title>
+    <title><?php if(isset($titlePage)){ echo $titlePage . " - " . TITLE; }else{echo TITLE;} ?></title>
     <link rel="stylesheet" href="<?php echo URL; ?>css/style.css">
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
