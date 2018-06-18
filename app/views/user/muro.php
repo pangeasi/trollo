@@ -1,4 +1,14 @@
-<h1><?php if(!empty($tarjetas)){echo strtoupper($name) ;}else{echo "Tus muros <br> $name";} ?></h1>
+<?php 
+if(!empty($tarjetas)){
+    echo "<h1>".strtoupper($name)."</h1>";
+
+}
+elseif($name == ''){
+    echo "<h1>Tus muros:</h1>";
+}else{
+    echo "<h1>".strtoupper($name)."</h1><br>No hay tarjetas";
+}
+?>
 <ul>
 <?php
     foreach($muros as $muro){

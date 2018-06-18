@@ -12,7 +12,7 @@ class Home extends Controller {
 
         session_start();
         if(isset($_SESSION['user_id'])){
-            if($name == ''){
+            if( !isset($name)){
                 $muros = $this->model->query("SELECT * FROM muro,usuarios_muros WHERE id_muro=id AND id_usuarios = :user_id",array("user_id"=>$_SESSION['user_id'][0]));
             }else{
                 $titlePage.=": " .$name;
