@@ -1,5 +1,8 @@
 <?php
 
+    //DESCRIPCIÓN DE LA APP
+    define("TITLE","Trollo");
+
     //RUTAS
     define('URL_PUBLIC_FOLDER', 'public');
     define('URL_PROTOCOL', 'http://');
