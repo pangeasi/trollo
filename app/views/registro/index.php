@@ -1,6 +1,7 @@
 <div class="login">
     <form action="/registro" method="post">
         <div class="content">
+            <h3>Introduce los datos:</h3>
             <label for="user">Usuario: </label><input type="text" name="user">
             <label for="user">Correo: </label><input type="email" name="email">
             <label for="user">Contraseña: </label><input type="password" name="pass">

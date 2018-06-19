@@ -1,20 +1,32 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Tajawal', sans-serif;
     margin: 0;
+    
 
 }
 header{
     width: 100%;
-    height: 100px;
+    height: 70px;
+    /* padding-left: 5px; */
     background-color: cadetblue;
     display: grid;
     grid-template-columns: 4fr 1fr;
 }
+
+.titleBrand{
+    margin-left: 30px;
+}
+main{
+    margin-left: 30px;
+}
 .logReg{
-    margin: 40px;
+    margin: 30px 15px;
 }
 .logReg>h4{
     display: inline;
+}
+.logReg a{
+    text-decoration: none;
 }
 .content {
     width: max-content;
@@ -35,6 +47,9 @@ input {
     margin-bottom: 9px; 
     border: 1px black dashed;
     padding: 5px;
+    -moz-appearance: none !important;
+    background-color: aliceblue;
+    color: black;
 }
 a,a:visited{
     color: black;
@@ -52,15 +67,11 @@ input[type="submit"] {
 .error{
     color: red;
 }
-.muro{
-    width: max-content;
-    cursor: pointer;
-    color: black;
-    padding: 3px;
+.muros{
+    list-style: none;
 }
-.muro:hover{
-    background-color: aqua;
-    padding: 3px;
+.muro{
+    padding: 10px;
 }
 .tarjetas{
     cursor: pointer;
