@@ -18,7 +18,9 @@ class Home extends Controller {
                 
                 $muro = $this->model->query("SELECT * FROM muro WHERE permlink = :muroLink LIMIT 1",array("muroLink"=>$name));
                 
-                $tarjetas = $this->model->query("SELECT * FROM tarjetas,muro WHERE id_muro=muro.id AND (muro.permlink = :muroLink AND id_user = :user_id)",array("muroLink"=>$name,"user_id"=>$_SESSION['user_id'][0])) ;
+                $secciones = $this->model->query("SELECT DISTINCT seccion FROM tarjetas,muro WHERE id_muro=muro.id AND (muro.permlink = :muroLink AND id_user = :user_id)",array("muroLink"=>$name,"user_id"=>$_SESSION['user_id'][0])) ;
+
+                $tarjetas = $this->model->query("SELECT tarjetas.id,id_muro,titulo,descripcion,id_user,seccion FROM tarjetas,muro WHERE id_muro=muro.id AND (muro.permlink = :muroLink AND id_user = :user_id)",array("muroLink"=>$name,"user_id"=>$_SESSION['user_id'][0])) ;
                 $titlePage.=": " .$muro[0]['nombre'];
             }
             
