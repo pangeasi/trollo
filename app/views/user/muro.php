@@ -77,17 +77,18 @@ elseif($name == ''){
             titleTarjeta = true;
         }else{
 
-            $('.seccion').on('focusin','.addTarjetaTextArea',function(){
-                descTarjeta = true
-                
-            })
-            $('.addTarjetaInput').attr('placeholder','PON UN TITULO!!')
+
             titleTarjeta = false;
             setTimeout(() => {
                 if(!descTarjeta){
-                location.reload();
+                    $('<p id="mensaje" style="color : red">Tienes que poner un titulo</p>').insertAfter(lastTarjeta)
+                    $('.addTarjetaInput').hide()
+                    $('.addTarjetaTextArea').hide()
                 }
             }, 100);
+            setTimeout(() => {
+                $("#mensaje").remove()
+            }, 3000);
 
             
         }
@@ -111,17 +112,11 @@ elseif($name == ''){
                     success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
                         console.log(response);
                         if(response == 1){
-                            $('<li class="tarjetas"><h3>'+ $('.addTarjetaInput').val() +'</h3>' + '<p>'+ $('.addTarjetaTextArea').val() +'</p></li>').insertAfter(lastTarjeta)
-                            $('.addTarjetaInput').hide()
-                            $('.addTarjetaTextArea').hide()
+
                             location.reload()
                         }
                     }
                 });
-                
-
-
-            
             }
         })
         
