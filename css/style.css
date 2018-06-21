@@ -73,17 +73,30 @@ input[type="submit"] {
 .muro{
     padding: 10px;
 }
+.seccionTarjeta{
+    padding-left: 10px;
+}
 .tarjetas{
     cursor: pointer;
+    list-style: none !important;
+    
 }
+
+
 .secciones{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    
 }
 .seccion {
     display: inline-block;
     margin-right: 10%;
+    background-color: rgb(151, 196, 181);
+    padding: 20px;
+    
+    
 }
+
 .fondoBlack{
     display: none;
     width: 50%;
@@ -113,4 +126,25 @@ input[type="submit"] {
     overflow: auto;
     z-index: 10;
 }
+.fa-plus {
+    display: none;
+    background-color: rgb(25, 137, 202);
+    padding: 15px;
+    color: white;
+    border-radius: 50%;
+    margin-left: 40%;
+    
+}
+.addTarjeta:hover{
+    background-color: transparent;
+}
 
+.addTarjetaTextArea, .addTarjetaInput{
+    display: block;
+    margin-bottom: 9px; 
+    border: 1px black dashed;
+    padding: 5px;
+    -moz-appearance: none !important;
+    background-color: aliceblue;
+    color: black;
+}

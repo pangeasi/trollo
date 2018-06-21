@@ -16,13 +16,13 @@ elseif($name == ''){
         }
     ?>
 </ul>
-
+<?php session_start(); $id_user = $_SESSION['user_id'][0]; //id del usuario en una variable para enviarla por ajax ?>
 <ul class="secciones">
     <?php
         foreach($secciones as $seccion){
             echo 
             "<li class='seccion'><h3>".$seccion['seccion']."</h3>
-            <ul>";
+            <ul class='seccionTarjeta'>";
             foreach($tarjetas as $tarjeta){
                 if($tarjeta['seccion'] === $seccion['seccion']){
                     echo "<li id='". $tarjeta['id']."' class='tarjetas' alt='". $tarjeta['seccion']."'><h3>".$tarjeta['titulo']."</h3><p>". substr($tarjeta['descripcion'],0,80) ."...</p>
@@ -32,12 +32,14 @@ elseif($name == ''){
             }
             echo 
             "</ul>
+            <i class='fas fa-plus fa-lg' style='display:none'></i>
             </li>";
         }
 
 
     ?>
 </ul>
+
 <div class="dropBack"></div>
 <div class="fondoBlack">
 
@@ -57,28 +59,75 @@ elseif($name == ''){
 </div>
 
 
+<script src="<?php echo URL; ?>js/muro.js"></script>
 <script>
-      
-    $('.muro>a').each(function(){
-        $(this).attr('href',$(this).attr('alt'))
+    let lastTarjeta;
+    $('.fa-plus').click(function(){
+        lastTarjeta = $(this).parent().find('.tarjetas').last()
+        $(this).hide()
+        $(this).parent().append('<br><input class="addTarjetaInput" type="text" placeholder="Titulo"><textarea class="addTarjetaTextArea" placeholder="Describe lo que sea..."></textarea>')
+        $('input[type=text]').focus();
         
     })
-    let idTarjeta;
-    $('.tarjetas')
-        .click(function(){
-            idTarjeta = $(this).attr('id')
-            console.log(idTarjeta)
-            $('.fondoBlack').show();
-            $('#id'+idTarjeta).show();
-            $('.dropBack').show();
+    let titleTarjeta = false;
+    let descTarjeta = false;
+    $('.seccion').on("focusout",".addTarjetaInput",function(){
+        if($('.addTarjetaInput').val() != ''){
+            
+            titleTarjeta = true;
+        }else{
+
+            $('.seccion').on('focusin','.addTarjetaTextArea',function(){
+                descTarjeta = true
+                
+            })
+            $('.addTarjetaInput').attr('placeholder','PON UN TITULO!!')
+            titleTarjeta = false;
+            setTimeout(() => {
+                if(!descTarjeta){
+                location.reload();
+                }
+            }, 100);
+
+            
+        }
+        $('.seccion').on("focusout",".addTarjetaTextArea",function(){
+            if(titleTarjeta || (titleTarjeta && descTarjeta)){
+
+                var parametros = {
+                    "titulo" : $('.addTarjetaInput').val(),
+                    "descripcion" : $('.addTarjetaTextArea').val(),
+                    "seccion" : $(lastTarjeta).attr('alt'),
+                    "id_user" : <?php  echo $id_user?>,
+                    "id_muro" : <?php echo $muro[0]['id'] ?>
+                };
+                $.ajax({
+                    data:  parametros, //datos que se envian a traves de ajax
+                    url:   "<?php echo URL; ?>add/tarjeta", //archivo que recibe la peticion
+                    type:  'post', //método de envio
+                    beforeSend: function () {
+                            console.log("Procesando, espere por favor...");
+                    },
+                    success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                        console.log(response);
+                        if(response == 1){
+                            $('<li class="tarjetas"><h3>'+ $('.addTarjetaInput').val() +'</h3>' + '<p>'+ $('.addTarjetaTextArea').val() +'</p></li>').insertAfter(lastTarjeta)
+                            $('.addTarjetaInput').hide()
+                            $('.addTarjetaTextArea').hide()
+                            location.reload()
+                        }
+                    }
+                });
+                
+
+
+            
+            }
         })
-    $('.tarjetaAbierta').on("click",function(){
-        console.log("dejate abierta!!!")
+        
+
+
     })
-    $('.dropBack').on("click",function(){
-        $('.fondoBlack').hide();
-        $('#id'+idTarjeta).hide();
-        $('.dropBack').hide();
-    })
+
 
 </script>
